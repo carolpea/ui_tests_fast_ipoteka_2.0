@@ -2,6 +2,7 @@ import time
 import pytest
 import pages
 
+
 class TestFooter:
 
     def test_user_should_be_auth(self, page):
