@@ -4,6 +4,6 @@ import config
 
 class BasePage:
     @staticmethod
-    def create_applic(self, page: Page) -> None:
+    def create_applic(page: Page) -> None:
         page.get_by_test_id("btn-sozdat").click()
         page.get_by_test_id("btn-podtverdit").click()

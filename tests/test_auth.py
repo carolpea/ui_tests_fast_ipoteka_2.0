@@ -1,4 +1,6 @@
 import pages
+import pytest
+import config
 
 
 class TestFooter:
