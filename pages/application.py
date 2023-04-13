@@ -80,6 +80,6 @@ class ApplicationStepOne:
 
 
     @staticmethod
-    def choose_bank_for_co_borrower(page: Page) -> None:
+    def choose_bank_vtb(page: Page) -> None:
         page.get_by_test_id("select-bank_code").click()
         page.get_by_test_id("select-option-bank_code-vtb").click()

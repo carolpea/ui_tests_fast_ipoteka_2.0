@@ -8,7 +8,7 @@ def test_add_a_new_co_borrower_and_check_validation(page):
     pages.index_page.open_index_page(page)
     pages.index_page.auth_manager(page)
     pages.base_page.create_applic(page)
-    pages.application.choose_bank_for_co_borrower(page)
+    pages.application.choose_bank_vtb(page)
     page.get_by_role("button", name="Добавить созаемщика").click()
     page.get_by_test_id("life-1-overlay").get_by_role("button", name="Добавить нового").click()
     modal = page.get_by_test_id("modal-client")
