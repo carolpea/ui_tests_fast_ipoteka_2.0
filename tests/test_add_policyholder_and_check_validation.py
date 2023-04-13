@@ -2,7 +2,6 @@ from playwright.sync_api import expect
 import re
 
 import pages
-import time
 
 
 def test_add_policyholder_and_check_validation(page):
