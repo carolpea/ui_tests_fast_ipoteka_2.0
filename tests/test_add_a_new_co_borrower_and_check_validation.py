@@ -1,18 +1,18 @@
 from playwright.sync_api import expect
-import re
-
 import pages
 import time
+import re
 
 
-def test_policyholder_validation(page):
+def test_add_a_new_co_borrower_and_check_validation(page):
     pages.index_page.open_index_page(page)
     pages.index_page.auth_manager(page)
     pages.base_page.create_applic(page)
-    pages.application.add_a_new_policyholder(page)
+    pages.application.choose_bank_for_co_borrower(page)
+    page.get_by_role("button", name="Добавить созаемщика").click()
+    page.get_by_test_id("life-1-overlay").get_by_role("button", name="Добавить нового").click()
     modal = page.get_by_test_id("modal-client")
     modal.get_by_test_id("btn-sokhranit").click()
-    # Фамилия
     expect(modal.get_by_test_id("input-last_name")).to_have_class(re.compile(r"is-invalid"))
     # Имя
     expect(modal.get_by_test_id("input-first_name")).to_have_class(re.compile(r"is-invalid"))
@@ -42,8 +42,6 @@ def test_policyholder_validation(page):
     expect(modal.get_by_test_id("select-address_registration")).to_have_class(re.compile(r"is-invalid"))
     # Адрес фактический
     expect(modal.get_by_test_id("select-address_residence")).to_have_class(re.compile(r"is-invalid"))
-    # modal.get_by_test_id("__BVID__13415").click()
     modal.get_by_text("Совпадает с фактическим адресом").click()
     expect(modal.get_by_test_id("select-address_residence")).to_have_class(re.compile(r"is-invalid"))
     expect(modal.get_by_test_id("input-middle_name")).to_have_class(re.compile(r"is-valid"))
-
