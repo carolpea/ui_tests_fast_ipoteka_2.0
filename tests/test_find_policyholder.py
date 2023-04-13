@@ -20,6 +20,5 @@ def test_find_policyholder(page):
     modal_confirm.get_by_role("button", name="нет").click()
     assert client_box.get_by_test_id("select-input-client_id").is_disabled(), 'object is not disabled'
     # assert client_box.get_by_label("123Ошибков**"), 'client not find' КАК СДЕЛАТЬ???
-    time.sleep(5)
 
 
