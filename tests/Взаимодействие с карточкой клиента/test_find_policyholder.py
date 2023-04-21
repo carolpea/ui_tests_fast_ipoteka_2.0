@@ -19,6 +19,7 @@ def test_find_policyholder(page):
     expect(modal_confirm).to_be_visible()
     modal_confirm.get_by_role("button", name="нет").click()
     assert client_box.get_by_test_id("select-input-client_id").is_disabled(), 'object is not disabled'
-    # assert client_box.get_by_label("123Ошибков**"), 'client not find' КАК СДЕЛАТЬ???
+    # locator = client_box.locator("multiselect__single")
+    # expect(locator).to_contain_text('Ошибков**')
 
 

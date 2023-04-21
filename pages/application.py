@@ -1,3 +1,5 @@
+import time
+
 from playwright.sync_api import Page, expect
 import random
 
@@ -83,3 +85,44 @@ class ApplicationStepOne:
     def choose_bank_vtb(page: Page) -> None:
         page.get_by_test_id("select-bank_code").click()
         page.get_by_test_id("select-option-bank_code-vtb").click()
+
+
+    @staticmethod
+    def choose_bank_sber(page: Page) -> None:
+        page.get_by_test_id("select-bank_code").click()
+        page.get_by_test_id("select-option-bank_code-sber").click()
+
+
+    @staticmethod
+    def find_policyholder_without_anketa(page: Page) -> None:
+        policyholder = page.get_by_test_id("policyholder")
+        client = policyholder.get_by_test_id("sh-input-client_id")
+        client.get_by_test_id("select-box-tags-client_id").click()
+        client.get_by_test_id("select-input-client_id").fill("Ошибков")
+        rows = client.locator(".multiselect__content .multiselect__element")
+        oshibka = page.locator("xpath=//ul[@class='multiselect__content']//*[contains(text(), 'Ошибков')])[1]")
+        oshibka.hover()
+        oshibka.click()
+        # time.sleep(5)
+        # assert rows == 1, rows
+        # elements = page.query_selector_all(".multiselect__content .multiselect__element")
+        # count = elements.count()
+        # assert count == -1, count
+        # count = rows.count()
+        # assert count > 0
+        # rows.first.click()
+        modal_confirm = page.locator(".js-modal-confirm-content")
+        modal_confirm.get_by_role("button", name="нет").click()
+
+    @staticmethod
+    def fill_credit_contract_block_sber(page: Page) -> None:
+        credit_contract = page.get_by_test_id("credit-contract")
+        credit_contract.get_by_test_id("input-mortgage_amount").fill("1234567.78")
+        page.get_by_test_id("select-box-tags-locality").get_by_text("Выберите значение").click()
+        # locality = credit_contract.page.get_by_test_id("select-input-locality")
+        page.get_by_test_id("select-input-locality").fill("Москва")
+        # rows = locality.locator(".multiselect__content .multiselect__element")
+        # rows.first.click()
+        credit_contract.get_by_test_id("select-input-locality").fill("москва")
+        credit_contract.get_by_test_id("select-option-locality-0").click()
+
