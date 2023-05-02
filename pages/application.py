@@ -99,17 +99,11 @@ class ApplicationStepOne:
         client = policyholder.get_by_test_id("sh-input-client_id")
         client.get_by_test_id("select-box-tags-client_id").click()
         client.get_by_test_id("select-input-client_id").fill("Ошибков")
-        rows = client.locator(".multiselect__content .multiselect__element")
-        oshibka = page.locator("xpath=//ul[@class='multiselect__content']//*[contains(text(), 'Ошибков')])[1]")
-        oshibka.hover()
-        oshibka.click()
-        # time.sleep(5)
-        # assert rows == 1, rows
-        # elements = page.query_selector_all(".multiselect__content .multiselect__element")
-        # count = elements.count()
-        # assert count == -1, count
-        # count = rows.count()
-        # assert count > 0
+        # client.locator("(//*[contains(text(), 'Ошибков')])[1]").click()
+        client.get_by_text('Ошибков').click()
+        # rows = client.locator(".multiselect__content .multiselect__element")
+
+        time.sleep(2)
         # rows.first.click()
         modal_confirm = page.locator(".js-modal-confirm-content")
         modal_confirm.get_by_role("button", name="нет").click()

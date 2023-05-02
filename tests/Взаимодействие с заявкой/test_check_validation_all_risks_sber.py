@@ -30,7 +30,13 @@ def test_check_validation_all_risks_sber(page):
     page.get_by_test_id("btn-imushchestvo").click()
     page.get_by_test_id("btn-titul").click()
     page.get_by_test_id("btn-rasschitat").click()
-    time.sleep(5)
-
+    life = page.get_by_test_id("life")
+    expect(life.get_by_test_id("input-height")).to_have_class(re.compile(r"is-invalid"))
+    expect(life.get_by_test_id("input-weight")).to_have_class(re.compile(r"is-invalid"))
+    expect(life.get_by_test_id("input-part")).to_be_disabled()
+    expect(life.get_by_test_id("input-total_area")).to_have_class(re.compile(r"is-invalid"))
+    expect(life.get_by_test_id("select-raw_address")).to_have_class(re.compile(r"is-invalid"))
+    expect(life.get_by_test_id("input-insurance_term")).to_have_class(re.compile(r"is-invalid"))
+    expect(life.get_by_test_id("input-cadastral_number")).to_have_class(re.compile(r"is-invalid"))
 
 
